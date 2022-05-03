@@ -19,7 +19,7 @@ rule deepvariant_make_examples:
         f"docker://google/deepvariant:{config['DEEPVARIANT_VERSION']}"
     params:
         vsc_min_fraction_indels="0.12",
-        pileup_image_width=199,
+        pileup_image_width="199",
         shard=lambda wildcards: wildcards.shard,
         reads=",".join(abams),
     message:
@@ -27,17 +27,18 @@ rule deepvariant_make_examples:
     shell:
         f"""
         (/opt/deepvariant/bin/make_examples \
-            --norealign_reads \
-            --vsc_min_fraction_indels {{params.vsc_min_fraction_indels}} \
-            --pileup_image_width {{params.pileup_image_width}} \
-            --track_ref_reads \
-            --phase_reads \
+            --add_hp_channel \
+            --alt_aligned_pileup=diff_channels \
+            --min_mapping_quality=1 \
+            --parse_sam_aux_fields \
             --partition_size=25000 \
             --phase_reads_region_padding=5000 \
-            --alt_aligned_pileup=diff_channels \
-            --add_hp_channel \
+            --phase_reads \
+            --pileup_image_width {{params.pileup_image_width}} \
+            --norealign_reads \
             --sort_by_haplotypes \
-            --parse_sam_aux_fields \
+            --track_ref_reads \
+            --vsc_min_fraction_indels {{params.vsc_min_fraction_indels}} \
             --mode calling \
             --ref {{input.reference}} \
             --reads {{params.reads}} \

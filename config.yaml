@@ -2,7 +2,7 @@
 tmpdir: '/scratch'
 
 # deepvariant
-DEEPVARIANT_VERSION: 'test-cl431547877-gpu'  # GPU
+DEEPVARIANT_VERSION: 'pichuan-cl445842347-10-gpu'  # GPU
 N_SHARDS: 256
 
 ref:
