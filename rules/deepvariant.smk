@@ -32,7 +32,7 @@ rule deepvariant_make_examples:
             --min_mapping_quality=1 \
             --parse_sam_aux_fields \
             --partition_size=25000 \
-            --phase_reads_region_padding=5000 \
+            --max_reads_per_partition=600 \
             --phase_reads \
             --pileup_image_width {{params.pileup_image_width}} \
             --norealign_reads \
