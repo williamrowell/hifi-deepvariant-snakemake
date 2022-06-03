@@ -2,7 +2,7 @@
 tmpdir: '/scratch'
 
 # deepvariant
-DEEPVARIANT_VERSION: '1.4.0'  # GPU
+DEEPVARIANT_VERSION: '1.4.0-gpu'  # GPU
 N_SHARDS: 256
 
 ref:
