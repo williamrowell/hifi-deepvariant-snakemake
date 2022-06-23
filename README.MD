@@ -3,7 +3,7 @@
 ## Workflow steps
 
 1) align HiFi reads to reference with [pbmm2](https://github.com/PacificBiosciences/pbmm2)
-2) call small variants with [DeepVariant](https://github.com/google/deepvariant), using two-pass method (DeepVariant :arrow_right: WhatsHap `phase` :arrow_right: WhatsHap `haplotag` :arrow_right: DeepVariant)
+2) call small variants with [DeepVariant v1.4](https://github.com/google/deepvariant)
 3) phase small variants with [WhatsHap](https://github.com/whatshap/whatshap)
 4) haplotag aligned BAMs with WhatsHap and merge
 
