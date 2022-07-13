@@ -66,6 +66,7 @@ rule whatshap_haplotag:
         f"samples/{sample}/logs/whatshap/haplotag/{sample}.{ref}.{{movie}}.log",
     params:
         "--tag-supplementary",
+    threads: 4
     conda:
         "envs/whatshap.yaml"
     message:
@@ -73,6 +74,7 @@ rule whatshap_haplotag:
     shell:
         """
         (whatshap haplotag {params} \
+            --output-threads {threads} \
             --output {output} \
             --reference {input.reference} \
             {input.vcf} {input.bam}) > {log} 2>&1
