@@ -20,6 +20,8 @@ deepvariant_postprocess_variants:
   extra: '--constraint=avx512'
 deepvariant_bcftools_stats:
   cpus: 4
+whatshap_haplotag:
+  cpus: 4
 samtools_index_bam_haplotag:
   cpus: 4
 merge_haplotagged_bams:
