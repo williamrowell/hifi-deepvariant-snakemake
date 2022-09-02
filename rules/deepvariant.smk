@@ -6,6 +6,8 @@ rule deepvariant_make_examples:
         bams=abams,
         bais=[f"{x}.bai" for x in abams],
         reference=config["ref"]["fasta"],
+        vcf=proposed_variants,
+        tbi=proposed_variants + '.tbi',
     output:
         tfrecord=temp(
             f"samples/{sample}/deepvariant/examples/examples.tfrecord-{{shard}}-of-{config['N_SHARDS']:05}.gz"
@@ -18,7 +20,6 @@ rule deepvariant_make_examples:
     container:
         f"docker://google/deepvariant:{config['DEEPVARIANT_VERSION']}"
     params:
-        vsc_min_fraction_indels="0.12",
         pileup_image_width="199",
         shard=lambda wildcards: wildcards.shard,
         reads=",".join(abams),
@@ -27,6 +28,8 @@ rule deepvariant_make_examples:
     shell:
         f"""
         (/opt/deepvariant/bin/make_examples \
+            --variant_caller=vcf_candidate_importer \
+            --proposed_variants=sites.vcf.gz \
             --add_hp_channel \
             --alt_aligned_pileup=diff_channels \
             --min_mapping_quality=1 \
@@ -38,7 +41,6 @@ rule deepvariant_make_examples:
             --norealign_reads \
             --sort_by_haplotypes \
             --track_ref_reads \
-            --vsc_min_fraction_indels {{params.vsc_min_fraction_indels}} \
             --mode calling \
             --ref {{input.reference}} \
             --reads {{params.reads}} \

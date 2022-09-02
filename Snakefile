@@ -45,6 +45,9 @@ movies = list(set(list(ubam_dict.keys()) + list(fastq_dict.keys())))
 abams = [f"samples/{sample}/aligned/{movie}.{ref}.bam" for movie in movies]
 abam_dict = {movie: f"samples/{sample}/aligned/{movie}.{ref}.bam" for movie in movies}
 
+# proposed variant vcf
+proposed_variants = f"proposed_variants/{sample}.{ref}.deepvariant.vcf.gz"
+
 # build a list of targets
 targets = []
 
